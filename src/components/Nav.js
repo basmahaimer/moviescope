@@ -1,9 +1,14 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import 'boxicons/css/boxicons.min.css';
 
 export default function Nav() {
   return (
     <nav style={navStyle}>
+      <div style={logoStyle}>
+        <i className='bx bxs-movie-play' style={{ fontSize: "2rem", marginRight: "10px", color: "#e50914" }}></i>
+        <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "white" }}>MovieScope</span>
+      </div>
       <ul style={ulStyle}>
         <li>
           <NavLink
@@ -29,10 +34,17 @@ export default function Nav() {
 
 const navStyle = {
   backgroundColor: "#141414",
-  padding: "10px 0",
+  padding: "10px 20px",
   boxShadow: "0 2px 4px rgba(0,0,0,0.5)",
   display: "flex",
-  justifyContent: "center", // centre horizontalement
+  justifyContent: "space-between",
+  alignItems: "center",
+  flexWrap: "wrap",
+};
+
+const logoStyle = {
+  display: "flex",
+  alignItems: "center",
 };
 
 const ulStyle = {

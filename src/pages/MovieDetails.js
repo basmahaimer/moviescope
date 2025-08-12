@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 
-const API_KEY = "f5538a3457ce719b7fce29bb11c729d5"; // Remplace par ta clé TMDB
+const API_KEY = "f5538a3457ce719b7fce29bb11c729d5";
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 export default function MovieDetails() {
@@ -23,30 +23,41 @@ export default function MovieDetails() {
     fetchMovie();
   }, [id]);
 
-  if (!movie) return <p style={{ color: "white", padding: "20px" }}>Chargement...</p>;
+  if (!movie)
+    return <p style={{ color: "white", padding: "20px" }}>Chargement...</p>;
 
   return (
-    <main style={{ backgroundColor: "#141414", color: "white", minHeight: "100vh", padding: "20px" }}>
-      <Link
-        to="/"
-        style={{ color: "#ccc", textDecoration: "underline", marginBottom: "20px", display: "inline-block" }}
-      >
+    <main className="movie-details" style={{ backgroundColor: "#141414", minHeight: "100vh", padding: "20px", color: "white", display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Link to="/" className="back-button">
         ← Retour à l'accueil
       </Link>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "20px" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "40px", marginTop: "30px", justifyContent: "center", maxWidth: "900px", width: "100%" }}>
         <img
-          src={movie.poster_path ? IMAGE_BASE_URL + movie.poster_path : "https://via.placeholder.com/300x450?text=Pas+d'image"}
+          src={
+            movie.poster_path
+              ? IMAGE_BASE_URL + movie.poster_path
+              : "https://via.placeholder.com/300x450?text=Pas+d'image"
+          }
           alt={movie.title}
-          style={{ borderRadius: "10px", maxWidth: "300px", width: "100%" }}
         />
+
         <div style={{ flex: "1 1 300px" }}>
           <h1>{movie.title}</h1>
-          <p style={{ color: "#bbb" }}>{movie.tagline}</p>
+
+          <div className="movie-info">
+            {movie.genres && movie.genres.map((genre) => (
+              <span key={genre.id} className="genre">{genre.name}</span>
+            ))}
+
+            <span className="year">{movie.release_date ? movie.release_date.slice(0, 4) : "N/A"}</span>
+
+            <span className="rating">{movie.vote_average ? movie.vote_average.toFixed(1) : "N/A"}</span>
+          </div>
+
+          {movie.tagline && <p style={{ fontStyle: "italic", color: "#bbb", marginBottom: "20px" }}>{movie.tagline}</p>}
+
           <p>{movie.overview}</p>
-          <p><strong>Date de sortie :</strong> {movie.release_date}</p>
-          <p><strong>Note moyenne :</strong> {movie.vote_average}</p>
-          <p><strong>Genres :</strong> {movie.genres ? movie.genres.map(g => g.name).join(", ") : "N/A"}</p>
         </div>
       </div>
     </main>

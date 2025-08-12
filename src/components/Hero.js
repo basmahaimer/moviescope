@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Hero({ movie }) {
   if (!movie) return null;
@@ -8,77 +9,60 @@ export default function Hero({ movie }) {
     : "";
 
   return (
-    <section
-      style={{
-        position: "relative",
-        backgroundImage: `url(${backdropUrl})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        color: "white",
-        height: "450px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        padding: "40px 60px",
-        textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
-        overflow: "hidden",
-      }}
-    >
-      <div
+    <Link to={`/movie/${movie.id}`} style={{ textDecoration: "none", color: "inherit" }}>
+      <section
         style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(180deg, rgba(20,20,20,0.7) 10%, rgba(20,20,20,0.9) 80%)",
-          zIndex: 1,
-        }}
-      ></div>
-      <h1 style={{ fontSize: "3rem", fontWeight: "bold", zIndex: 2 }}>{movie.title}</h1>
-      <p
-        style={{
-          maxWidth: "700px",
-          fontSize: "1.1rem",
-          zIndex: 2,
-          marginTop: "10px",
-          lineHeight: "1.4",
-          maxHeight: "90px",
+          position: "relative",
+          backgroundImage: `url(${backdropUrl})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          color: "white",
+          height: "650px", // taille augmentée
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "flex-end",
+          padding: "60px 80px",
+          textShadow: "2px 2px 8px rgba(0,0,0,0.8)",
           overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
+          transition: "background-image 0.4s ease-in-out",
+          cursor: "pointer",
         }}
-        title={movie.overview}
       >
-        {movie.overview}
-      </p>
-      <div style={{ marginTop: "20px", zIndex: 2 }}>
-        <button
+        <div
           style={{
-            backgroundColor: "#e50914",
-            border: "none",
-            color: "white",
-            padding: "12px 25px",
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, rgba(20,20,20,0.5) 0%, rgba(20,20,20,0.9) 80%)",
+            zIndex: 1,
+          }}
+        ></div>
+        <h1
+          style={{
+            fontSize: "4rem",
             fontWeight: "bold",
-            borderRadius: "4px",
-            cursor: "pointer",
-            marginRight: "10px",
+            zIndex: 2,
+            maxWidth: "900px",
           }}
         >
-          ▶ Lecture
-        </button>
-        <button
+          {movie.title}
+        </h1>
+        <p
           style={{
-            backgroundColor: "rgba(109,109,110,0.7)",
-            border: "none",
-            color: "white",
-            padding: "12px 25px",
-            fontWeight: "bold",
-            borderRadius: "4px",
-            cursor: "pointer",
+            maxWidth: "800px",
+            fontSize: "1.2rem",
+            zIndex: 2,
+            marginTop: "15px",
+            lineHeight: "1.5",
+            maxHeight: "110px",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
           }}
+          title={movie.overview}
         >
-          ℹ Plus d'infos
-        </button>
-      </div>
-    </section>
+          {movie.overview}
+        </p>
+      </section>
+    </Link>
   );
 }
