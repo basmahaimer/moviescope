@@ -11,7 +11,7 @@ export default function Home() {
   const [heroMovie, setHeroMovie] = useState(null);
   const [lastHoveredMovie, setLastHoveredMovie] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedGenres, setSelectedGenres] = useState([]); // multi-select
+  const [selectedGenres, setSelectedGenres] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -91,6 +91,14 @@ export default function Home() {
     const matchesSearch = q ? movie.title.toLowerCase().includes(q) : true;
     return matchesGenre && matchesSearch;
   });
+
+  // ✅ Mise à jour automatique du Hero pour le premier film filtré
+  useEffect(() => {
+    if (filteredMovies.length > 0) {
+      setHeroMovie(filteredMovies[0]);
+      setLastHoveredMovie(filteredMovies[0]);
+    }
+  }, [filteredMovies]);
 
   const gridStyle = {
     display: "grid",

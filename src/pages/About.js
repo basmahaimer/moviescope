@@ -2,19 +2,26 @@ import React from "react";
 
 export default function About() {
   return (
-    <div style={{ maxWidth: 800, margin: "24px auto", padding: 16, color: "#fff" }}>
-      <h2 style={{ color: "#e50914" }}>À propos de MovieScope</h2>
-      <p style={{ fontSize: "1.1rem", lineHeight: "1.6" }}>
-        <strong>MovieScope</strong> est une plateforme de découverte de films inspirée
-        de l’expérience utilisateur Netflix. Ce projet a pour objectif de démontrer
-        l’intégration d’API, la gestion des états avec React, la navigation via React Router
-        et la mise en place d’interfaces modernes et réactives.
+    <main
+      style={{
+        backgroundColor: "#141414",
+        color: "white",
+        minHeight: "100%",
+        padding: "40px 20px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <h1>À propos de MovieScope</h1>
+      <p style={{ maxWidth: "800px", lineHeight: "1.6", marginTop: "20px" }}>
+        MovieScope est une application React qui permet de découvrir des films populaires, 
+        de filtrer par genre, et de consulter les détails complets de chaque film. 
+        Elle utilise l'API de TMDB pour récupérer les informations et images des films. 
+        Notre objectif est de fournir une expérience fluide et agréable aux cinéphiles.
       </p>
-      <p style={{ fontSize: "1.1rem", lineHeight: "1.6" }}>
-        Vous y trouverez un large catalogue de films, des recherches rapides, une interface
-        fluide et un design immersif. Ce projet évolue constamment avec de nouvelles
-        fonctionnalités et améliorations visuelles.
-      </p>
-    </div>
+    </main>
   );
 }
