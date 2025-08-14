@@ -1,70 +1,101 @@
-# Getting Started with Create React App
+# 🎬 MovieScope
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MovieScope est une application React qui permet de **découvrir des films populaires**, de **filtrer par genre**, de **consulter les détails complets** d’un film et de naviguer facilement entre les pages grâce à **React Router**.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## **Table des matières**
+- [Aperçu](#aperçu)
+- [Fonctionnalités](#fonctionnalités)
+- [Technologies utilisées](#technologies-utilisées)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Structure du projet](#structure-du-projet)
+- [Licence](#licence)
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## **Aperçu**
+- Page d’accueil : affiche la liste des films avec **affiches**, **titres**, **notes** et **genres colorés**.  
+- Page de détails : affiche toutes les informations d’un film sélectionné.  
+- Page “À propos” : informations sur l’application et ses objectifs.  
+- Interface responsive pour **mobile, tablette et desktop**.  
+- Animations légères sur les cartes et Hero pour une meilleure expérience utilisateur.  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## **Fonctionnalités**
+- Filtrage par genres avec **couleurs dynamiques**.  
+- Recherche de films par titre.  
+- Hero dynamique qui change au **survol des films** ou affiche le **premier film par défaut** d’une catégorie.  
+- Navigation fluide entre pages avec **React Router** (`/`, `/movie/:id`, `/about`).  
+- Affichage conditionnel si aucun film ne correspond à la recherche.  
+- Mise en forme avec **CSS classique**, **CSS Modules** et **CSS-in-JS**.  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## **Technologies utilisées**
+- **React**  
+- **React Router DOM**  
+- **JavaScript (ES6+)**  
+- **CSS / CSS Modules / CSS-in-JS**  
+- **API TMDB** pour récupérer les films  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## **Installation**
+1. Clone le projet :  
+```bash
+git clone https://github.com/basmahaimer/moviescope.git
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1.Accède au dossier :
 
-### `npm run eject`
+cd moviescope
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2.Installe les dépendances :
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+npm install
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+3.Lance l’application :
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+npm start
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+Ouvre http://localhost:3000 dans ton navigateur.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## **Usage**
 
-### Analyzing the Bundle Size
+Sur la page d’accueil, clique sur une catégorie pour filtrer les films.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Survole un film pour voir ses détails dans le Hero.
 
-### Making a Progressive Web App
+Clique sur un film pour accéder à sa page de détails.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Navigue vers À propos depuis le menu pour découvrir l’application.
 
-### Advanced Configuration
+Structure du projet
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+moviescope/
+├── public/
+│   ├── index.js
+│   └── index.css
+├── src/
+│   ├── components/
+│   │   ├── Hero.js
+│   │   └── Nav.js
+│   │   └── Footer.js
+│   ├── pages/
+│   │   ├── Home.js
+│   │   ├── MovieDetails.js
+│   │   └── About.js
+│   ├── styles/
+│   │   ├── global.css
+│   │   └── ...
+│   ├── App.js
+│   └── index.js
+├── .gitignore
+├── package.json
+├── README.md
+└── yarn.lock / package-lock.json
