@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Hero from "../components/Hero";
 
 const API_KEY = "f5538a3457ce719b7fce29bb11c729d5";
@@ -9,13 +9,13 @@ export default function Home() {
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState([]);
   const [heroMovie, setHeroMovie] = useState(null);
-  const [lastHoveredMovie, setLastHoveredMovie] = useState(null);
+  const [hoveredMovie, setHoveredMovie] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
   const navigate = useNavigate();
 
-  // couleurs des badges par genre
   const genreColors = {
     Action: "#e50914",
     Aventure: "#1f8ef1",
@@ -23,57 +23,50 @@ export default function Home() {
     Drame: "#9b59b6",
     Horreur: "#c0392b",
     Animation: "#16a085",
+    Thriller: "#9c27b0",
+    Romance: "#ff4081",
+    Fantastique: "#3f51b5",
+    ScienceFiction: "#00bcd4",
+    Documentaire: "#8bc34a",
+    Mystère: "#ff9800",
+    Western: "#795548",
+    Musique: "#ffc107",
+    Guerre: "#607d8b",
+    Historique: "#ff5722",
   };
 
   useEffect(() => {
     async function fetchGenres() {
-      try {
-        const res = await fetch(
-          `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=fr-FR`
-        );
-        const data = await res.json();
-        setGenres(data.genres || []);
-      } catch (err) {
-        console.error("Genres fetch error:", err);
-      }
+      const res = await fetch(
+        `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=fr-FR`
+      );
+      const data = await res.json();
+      setGenres(data.genres || []);
     }
 
     async function fetchMovies() {
-      try {
-        setLoading(true);
-        let all = [];
-        for (let page = 1; page <= 5; page++) {
-          const res = await fetch(
-            `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr-FR&page=${page}`
-          );
-          const data = await res.json();
-          if (data && data.results) all = all.concat(data.results);
-        }
-        const unique = Array.from(new Map(all.map((m) => [m.id, m])).values());
-        setMovies(unique);
-        setHeroMovie(unique[0] || null);
-        setLastHoveredMovie(unique[0] || null);
-      } catch (err) {
-        console.error("Movies fetch error:", err);
-      } finally {
-        setLoading(false);
+      setLoading(true);
+      let all = [];
+      for (let page = 1; page <= 5; page++) {
+        const res = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=fr-FR&page=${page}`
+        );
+        const data = await res.json();
+        if (data && data.results) all = all.concat(data.results);
       }
+      const unique = Array.from(new Map(all.map((m) => [m.id, m])).values());
+      setMovies(unique);
+      setHeroMovie(unique[0] || null);
+      setLoading(false);
     }
 
     fetchGenres();
     fetchMovies();
   }, []);
 
-  // scroll top quand on change catégorie/recherche
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [selectedGenres, searchQuery]);
-
   const toggleGenre = (genreId) => {
     setSelectedGenres((prev) =>
-      prev.includes(genreId)
-        ? prev.filter((id) => id !== genreId)
-        : [...prev, genreId]
+      prev.includes(genreId) ? prev.filter((id) => id !== genreId) : [...prev, genreId]
     );
   };
 
@@ -92,25 +85,30 @@ export default function Home() {
     return matchesGenre && matchesSearch;
   });
 
-  // ✅ Mise à jour automatique du Hero pour le premier film filtré
   useEffect(() => {
     if (filteredMovies.length > 0) {
       setHeroMovie(filteredMovies[0]);
-      setLastHoveredMovie(filteredMovies[0]);
     }
   }, [filteredMovies]);
+
+  const displayedHeroMovie = hoveredMovie || heroMovie;
+
+  const handleMovieClick = (movieId) => {
+    setFadeOut(true);
+    setTimeout(() => navigate(`/movie/${movieId}`), 300);
+  };
 
   const gridStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(160px, 200px))",
     gap: "15px",
     justifyContent: "center",
+    opacity: fadeOut ? 0 : 1,
+    transition: "opacity 0.3s ease",
   };
 
-  const displayedHeroMovie = lastHoveredMovie || heroMovie;
-
   return (
-    <main style={{ backgroundColor: "#141414", color: "white", minHeight: "100vh" }}>
+    <main style={{ backgroundColor: "#141414", color: "white", minHeight: "100vh", transition: "opacity 0.3s ease", opacity: fadeOut ? 0 : 1 }}>
       <Hero movie={displayedHeroMovie} />
 
       <section style={{ padding: "20px 30px" }}>
@@ -124,7 +122,7 @@ export default function Home() {
                 padding: "8px 14px",
                 borderRadius: "20px",
                 border: "none",
-                backgroundColor: selectedGenres.includes(g.id) ? "#e50914" : "#333",
+                backgroundColor: selectedGenres.includes(g.id) ? genreColors[g.name] || "#e50914" : "#333",
                 color: "white",
                 cursor: "pointer",
                 fontWeight: selectedGenres.includes(g.id) ? 700 : 500,
@@ -133,7 +131,7 @@ export default function Home() {
               {g.name}
             </button>
           ))}
-          {selectedGenres.length > 0 || searchQuery ? (
+          {(selectedGenres.length > 0 || searchQuery) && (
             <button
               onClick={clearFilters}
               style={{
@@ -148,7 +146,7 @@ export default function Home() {
             >
               Clear Filters
             </button>
-          ) : null}
+          )}
         </div>
 
         {/* Search */}
@@ -188,33 +186,24 @@ export default function Home() {
               ))
             : filteredMovies.length === 0
             ? (
-              <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
-                🎬 Aucun film trouvé pour cette recherche ou catégorie.
-              </p>
+              <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>🎬 Aucun film trouvé.</p>
             )
             : filteredMovies.map((movie) => (
                 <div
                   key={movie.id}
-                  onMouseEnter={() => setLastHoveredMovie(movie)}
-                  onClick={() => navigate(`/movie/${movie.id}`)}
+                  onMouseEnter={() => setHoveredMovie(movie)}
+                  onMouseLeave={() => setHoveredMovie(null)}
+                  onClick={() => handleMovieClick(movie.id)}
                   style={{
                     cursor: "pointer",
-                    textDecoration: "none",
-                    color: "white",
                     borderRadius: "8px",
                     overflow: "hidden",
                     backgroundColor: "#222",
                     boxShadow: "0 0 8px rgba(0,0,0,0.7)",
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
                   }}
-                  onMouseOver={(e) => {
-                    e.currentTarget.style.transform = "scale(1.05)";
-                    e.currentTarget.style.boxShadow = "0 0 15px rgba(255,255,255,0.2)";
-                  }}
-                  onMouseOut={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                    e.currentTarget.style.boxShadow = "0 0 8px rgba(0,0,0,0.7)";
-                  }}
+                  onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+                  onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
                 >
                   <img
                     src={
@@ -227,7 +216,7 @@ export default function Home() {
                       width: "100%",
                       height: "280px",
                       objectFit: "cover",
-                      display: "block",
+                      transition: "transform 0.3s ease",
                     }}
                   />
                   <div style={{ padding: "10px" }}>
@@ -263,5 +252,3 @@ export default function Home() {
   );
 }
 
-
-//f5538a3457ce719b7fce29bb11c729d5

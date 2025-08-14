@@ -9,7 +9,7 @@ export default function Footer() {
         <a href="https://www.themoviedb.org/" target="_blank" rel="noreferrer">
           Source API
         </a>
-        <a href="https://github.com/ton-profil" target="_blank" rel="noreferrer">
+        <a href="https://github.com/basmahaimer" target="_blank" rel="noreferrer">
           GitHub
         </a>
       </div>
