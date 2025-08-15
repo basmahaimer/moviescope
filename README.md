@@ -1,6 +1,6 @@
 # 🎬 MovieScope
 
-MovieScope est une application React qui permet de **découvrir des films populaires**, de **filtrer par genre**, de **consulter les détails complets** d’un film et de naviguer facilement entre les pages grâce à **React Router**.
+**MovieScope** est une application React qui permet de **découvrir des films populaires**, de **filtrer par genre**, de **consulter les détails complets** d’un film et de naviguer facilement entre les pages grâce à **React Router**.
 
 ---
 
@@ -16,11 +16,11 @@ MovieScope est une application React qui permet de **découvrir des films popula
 ---
 
 ## **Aperçu**
-- Page d’accueil : affiche la liste des films avec **affiches**, **titres**, **notes** et **genres colorés**.  
-- Page de détails : affiche toutes les informations d’un film sélectionné.  
-- Page “À propos” : informations sur l’application et ses objectifs.  
-- Interface responsive pour **mobile, tablette et desktop**.  
-- Animations légères sur les cartes et Hero pour une meilleure expérience utilisateur.  
+- **Page d’accueil** : affiche la liste des films avec **affiches**, **titres**, **notes** et **genres colorés**.  
+- **Page de détails** : affiche toutes les informations d’un film sélectionné.  
+- **Page “À propos”** : informations sur l’application et ses objectifs.  
+- **Interface responsive** pour mobile, tablette et desktop.  
+- **Animations légères** sur les cartes et Hero pour une meilleure expérience utilisateur.  
 
 ---
 
@@ -45,27 +45,28 @@ MovieScope est une application React qui permet de **découvrir des films popula
 
 ## **Installation**
 1. Clone le projet :  
-```bash
+
 git clone https://github.com/basmahaimer/moviescope.git
 
-1.Accède au dossier :
+2.Accède au dossier :
 
 cd moviescope
 
 
-2.Installe les dépendances :
+3.Installe les dépendances :
 
 npm install
 
 
-3.Lance l’application :
+4.Lance l’application :
 
 npm start
 
 
-Ouvre http://localhost:3000 dans ton navigateur.
+5.Ouvre http://localhost:3000 dans ton navigateur.
 
-## **Usage**
+---
+## Usage****
 
 Sur la page d’accueil, clique sur une catégorie pour filtrer les films.
 
@@ -75,27 +76,38 @@ Clique sur un film pour accéder à sa page de détails.
 
 Navigue vers À propos depuis le menu pour découvrir l’application.
 
-Structure du projet
+---
+## Structure du projet****
 
 moviescope/
 ├── public/
-│   ├── index.js
-│   └── index.css
+│   ├── index.html
+│   └── ...
 ├── src/
 │   ├── components/
 │   │   ├── Hero.js
-│   │   └── Nav.js
+│   │   ├── Nav.js
 │   │   └── Footer.js
 │   ├── pages/
 │   │   ├── Home.js
 │   │   ├── MovieDetails.js
 │   │   └── About.js
+│   │     └── Home.module.css
 │   ├── styles/
-│   │   ├── global.css
-│   │   └── ...
+│   │   └── global.css
+│   ├── data/
+│   │   └── Movies.css
+│   │    └── Movies.js
 │   ├── App.js
 │   └── index.js
+│   └── index.css
 ├── .gitignore
 ├── package.json
 ├── README.md
 └── yarn.lock / package-lock.json
+---
+## Auteur
+
+- **BasmaHamer** – *Développeuse Front-End*  
+  [basmahaimer](https://github.com/basmahaimer)
+

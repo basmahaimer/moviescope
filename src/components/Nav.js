@@ -6,8 +6,19 @@ export default function Nav() {
   return (
     <nav style={navStyle}>
       <div style={logoStyle}>
-        <i className='bx bxs-movie-play' style={{ fontSize: "2rem", marginRight: "10px", color: "#e50914" }}></i>
-        <span style={{ fontSize: "1.6rem", fontWeight: "bold", color: "white" }}>MovieScope</span>
+        <i
+          className='bx bxs-movie-play'
+          style={{ fontSize: "2rem", marginRight: "10px", color: "#e50914" }}
+        ></i>
+        <span
+          style={{
+            fontSize: "1.6rem",
+            fontWeight: "bold",
+            color: "white"
+          }}
+        >
+          MovieScope
+        </span>
       </div>
       <ul style={ulStyle}>
         <li>
@@ -40,6 +51,9 @@ const navStyle = {
   justifyContent: "space-between",
   alignItems: "center",
   flexWrap: "wrap",
+  position: "sticky", // ✅ rend la navbar sticky
+  top: 0,             // ✅ reste en haut
+  zIndex: 1000,       // ✅ reste au-dessus du contenu
 };
 
 const logoStyle = {
