@@ -11,7 +11,7 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Structure du projet](#structure-du-projet)
-- [Quteur](#auteur)
+- [Auteur](#auteur)
 
 ---
 
